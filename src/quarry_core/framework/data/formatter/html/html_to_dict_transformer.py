@@ -9,7 +9,7 @@ nltk.download('punkt', quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
 
 
-class HTMLToDictFormatter:
+class HTMLToDictTransformer:
     """
     A class for converting HTML to dictionary representations using different methods.
     """
@@ -52,7 +52,7 @@ class HTMLToDictFormatter:
         soup = BeautifulSoup(html_string, 'lxml')
 
         return [
-            HTMLToDictFormatter._parse_beautifulsoup_element(child)
+            HTMLToDictTransformer._parse_beautifulsoup_element(child)
             for child in soup.body.children
             if child != "\n"
         ]
@@ -83,7 +83,7 @@ class HTMLToDictFormatter:
             result.update({"href": element.get("href", ""), "text": element.string or ""})
         else:
             content: List[Union[str, Dict[str, Any]]] = [
-                HTMLToDictFormatter._parse_beautifulsoup_element(child)
+                HTMLToDictTransformer._parse_beautifulsoup_element(child)
                 for child in element.children
                 if not isinstance(child, NavigableString) or child.strip()
             ]

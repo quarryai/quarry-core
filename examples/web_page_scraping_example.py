@@ -2,8 +2,8 @@ import asyncio
 from typing import Dict, List, Any, Optional
 from lxml import html
 from lxml.html import HtmlElement
-from quarry_core.framework.data.formatter.html.html_to_dict_formatter import HTMLToDictFormatter
-from quarry_core.framework.data.formatter.markdown.markdown_formatter import MarkdownFormatter
+from quarry_core.framework.data.formatter.html.html_to_dict_transformer import HTMLToDictTransformer
+from quarry_core.framework.data.formatter.markdown.markdown_transformer import MarkdownTransformer
 from quarry_core.framework.web.html.html2text_extended import HTML2TextExtended
 from quarry_core.framework.web.html.html_data_elements_extractor import HTMLDataElementsExtractor
 from quarry_core.framework.web.html.html_metadata_extractor import HTMLMetadataExtractor
@@ -42,7 +42,7 @@ async def main() -> None:
     if sanitized_tree is not None:
         # Convert sanitized HTML to plaintext as a first step using HTML2Text and then to final HTML tree
         plaintext: str = HTML2TextExtended().to_plaintext(sanitized_tree)
-        final_tree: HtmlElement = MarkdownFormatter.to_html_lxml(plaintext)
+        final_tree: HtmlElement = MarkdownTransformer.to_html_lxml(plaintext)
 
         # Extract various elements
         images: List[Dict[str, Any]] = HTMLDataElementsExtractor.try_extract_images(
@@ -54,11 +54,11 @@ async def main() -> None:
         # Parse content into different formats:
 
         # JSON
-        dict_unstructured = HTMLToDictFormatter.to_dict_unstructured(final_tree)
-        dict_beautifulsoup = HTMLToDictFormatter.to_dict_beautifulsoup(final_tree)
+        dict_unstructured = HTMLToDictTransformer.to_dict_unstructured(final_tree)
+        dict_beautifulsoup = HTMLToDictTransformer.to_dict_beautifulsoup(final_tree)
         # Markdown
         markdown = HTML2TextExtended().to_plaintext(final_tree)
-
+        standardize = MarkdownTransformer.replace_tables(markdown).replace("[code]", "```\n").replace("[/code]", "```\n")
         pass
 
         # Construct and return the result dictionary
