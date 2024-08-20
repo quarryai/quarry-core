@@ -1,10 +1,12 @@
+import io
 from typing import List, Dict, Any, Optional
 from urllib.parse import urlparse, urljoin
 
+import pandas as pd
 from bs4 import BeautifulSoup
 from lxml import etree
 from lxml.html import HtmlElement
-
+import csv
 from quarry_core.utilities import dataframe_util
 
 
@@ -62,21 +64,19 @@ class HTMLDataElementsExtractor:
         return images
 
     @staticmethod
-    def try_extract_tables(tree: HtmlElement) -> List[List[Dict[str, Any]]]:
+    def try_extract_tables(tree: HtmlElement) -> List[str]:
         """
-        Extract tables from an HtmlElement and convert them to a list of list of dictionaries.
+        Extract tables from an HtmlElement and convert them to a list of CSV strings.
 
         Args:
             tree (HtmlElement): The HtmlElement containing tables.
 
         Returns:
-            List[List[Dict[str, Any]]]: A list of tables, where each table is a list of dictionaries.
-                Each dictionary represents a row in the table.
+            List[str]: A list of CSV strings, each representing a table from the HTML.
 
         Raises:
             ValueError: If no tables are found in the HTML content.
         """
-        # Convert HtmlElement to string
         # Convert HtmlElement to string, preserving HTML structure
         html_str = etree.tostring(tree, encoding='unicode', method='html')
 
@@ -89,4 +89,30 @@ class HTMLDataElementsExtractor:
         if not tables:
             return []
 
-        return [dataframe_util.cleanup_html_table_df(df=df).to_dict("records") for df in tables]
+        result = []
+        for table in tables:
+            table_html = str(table)  # Convert each table to a string
+            try:
+                dfs = pd.read_html(io.StringIO(table_html))
+                for df in dfs:
+                    df_clean = dataframe_util.cleanup_html_table_df(df=df)
+
+                    # Convert DataFrame to CSV string
+                    csv_buffer = io.StringIO()
+                    df_clean.to_csv(path_or_buf=csv_buffer,
+                                    index=False,
+                                    sep=",",
+                                    header=False,
+                                    quoting=csv.QUOTE_NONNUMERIC,
+                                    escapechar="\\")
+                    csv_string = csv_buffer.getvalue()
+
+                    result.append({
+                        "columns": str(list(df_clean.columns)),
+                        "rows": csv_string.split("\r\n")
+                    })
+            except ValueError:
+                # If pd.read_html fails to parse a table, skip it
+                continue
+
+        return result

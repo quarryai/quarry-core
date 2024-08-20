@@ -23,7 +23,7 @@ TEST_LINKS: Dict[str, str] = {
 
 async def main() -> None:
     # Fetch the HTML content
-    downloaded_html: HTMLPageContent = ScrapyHTMLLoader().fetch(TEST_LINKS["coindesk"])
+    downloaded_html: HTMLPageContent = ScrapyHTMLLoader().fetch(TEST_LINKS["tables"])
 
     # Parse the HTML into a tree structure
     orig_tree: HtmlElement = html.fromstring(downloaded_html.html)
@@ -60,6 +60,10 @@ async def main() -> None:
         # JSON
         dict_unstructured = HTMLToDictFormatter.to_dict_unstructured(final_tree)
         dict_beautifulsoup = HTMLToDictFormatter.to_dict_beautifulsoup(final_tree)
+        # Markdown
+        markdown = HTML2TextExtended().to_plaintext(final_tree)
+
+        pass
 
         # Construct and return the result dictionary
         # doc = {
