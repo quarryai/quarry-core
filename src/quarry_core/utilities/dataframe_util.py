@@ -27,7 +27,4 @@ def cleanup_html_table_df(df: pd.DataFrame, unnamed_col_prefix: str = "unnamed_c
     # Rename columns using a list comprehension
     df.columns = [rename_column(col, idx) for idx, col in enumerate(df.columns)]
 
-    # Replace empty strings with NaN and then fill NaN with a placeholder
-    df.replace({np.nan, None}, inplace=True)
-
-    return df
+    return df.replace({np.nan, None})

@@ -107,22 +107,16 @@ class HTMLElementXPaths:
 
     TITLE: List[str] = [
         '//meta[@property="og:title"]/@content',
-        '//meta[@name="twitter:title"]/@content',
         '//meta[@name="title"]/@content',
         '//h1[contains(@class, "title")]/text()',
         '//h1[contains(@class, "headline")]/text()',
         '//h1/text()',
         "//title/text()",
+        '//meta[@name="twitter:title"]/@content',
     ]
 
     DESCRIPTION: List[str] = [
-        '//meta[@property="og:description"]/@content',
-        '//meta[@name="twitter:description"]/@content',
-        '//meta[@name="description"]/@content',
-        '//meta[@itemprop="description"]/@content',
-        '//p[contains(@class, "description")]/text()',
-        '//p[contains(@class, "summary")]/text()',
-        '//div[contains(@class, "description")]/text()',
+        '//meta[@name="description"]/@content'
     ]
 
     KEYWORDS: List[str] = [

@@ -32,6 +32,7 @@ class ScrapyHTMLLoader:
         """
         settings = get_project_settings()
         settings.set("ROBOTSTXT_OBEY", False)
+        settings.set("LOG_LEVEL", "WARNING")
         settings.set("DOWNLOAD_DELAY", float(os.getenv("DOWNLOAD_DELAY", "1")))
         settings.set("CONCURRENT_REQUESTS_PER_DOMAIN", int(os.getenv("CONCURRENT_REQUESTS", "2")))
         settings.set(
@@ -42,6 +43,8 @@ class ScrapyHTMLLoader:
             },
         )
         settings.set("EXTENSIONS", {"scrapy.extensions.telnet.TelnetConsole": None})
+        settings.set("REQUEST_FINGERPRINTER_IMPLEMENTATION", "2.7")
+
         return settings
 
     def fetch(self, url: str) -> HTMLPageContent:
