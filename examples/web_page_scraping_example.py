@@ -29,11 +29,7 @@ async def main() -> None:
     orig_tree: HtmlElement = html.fromstring(downloaded_html.html)
 
     # Extract metadata
-    title: Optional[str] = HTMLMetadataExtractor.try_extract_title(tree=orig_tree)
-    description: Optional[str] = HTMLMetadataExtractor.try_extract_description(tree=orig_tree)
-    keywords: Optional[List[str]] = HTMLMetadataExtractor.try_extract_keywords(tree=orig_tree)
-    authors: Optional[List[str]] = HTMLMetadataExtractor.try_extract_authors(tree=orig_tree)
-    published_time: Optional[str] = HTMLMetadataExtractor.try_extract_publish_time(tree=orig_tree)
+    metadata: Dict = HTMLMetadataExtractor(tree=orig_tree).try_get_all()
 
     # Clean up the HTML tree
     sanitized_tree: Optional[HtmlElement] = (
