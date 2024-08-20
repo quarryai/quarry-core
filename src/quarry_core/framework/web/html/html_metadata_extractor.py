@@ -32,19 +32,21 @@ class HTMLMetadataExtractor:
 
             if descriptions:
                 description = descriptions[0].strip()
+                break
 
         return description
 
     @staticmethod
     def try_extract_keywords(tree: HtmlElement) -> Optional[List[str]]:
         """Extract the keywords from the HTML tree."""
-        keywords: Optional[List[str]] = None
+        keywords: Optional[List[str]] = []
 
         for xpath in HTMLElementXPaths.KEYWORDS:
-            keywords = tree.xpath(xpath)
+            extracted_keywords = tree.xpath(xpath)
 
-            if keywords:
-                keywords = [kw.strip() for kw in keywords]
+            if extracted_keywords:
+                for kws in extracted_keywords:
+                    keywords.extend([kw.strip() for kw in kws.split(",")])
 
         return keywords
 
@@ -68,9 +70,9 @@ class HTMLMetadataExtractor:
         authors: List[str] = []
 
         for xpath in HTMLElementXPaths.AUTHOR:
-            authors = tree.xpath(xpath)
+            extracted_authors = tree.xpath(xpath)
 
-            for author in authors:
+            for author in extracted_authors:
                 cleaned_author = HTMLMetadataExtractor._clean_author_name(author)
                 if cleaned_author and cleaned_author not in authors:
                     authors.append(cleaned_author)

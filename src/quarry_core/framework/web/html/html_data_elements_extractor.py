@@ -1,8 +1,9 @@
-import io
 from typing import List, Dict, Any, Optional
 from urllib.parse import urlparse, urljoin
+
+from bs4 import BeautifulSoup
+from lxml import etree
 from lxml.html import HtmlElement
-import pandas as pd
 
 from quarry_core.utilities import dataframe_util
 
@@ -76,7 +77,16 @@ class HTMLDataElementsExtractor:
             ValueError: If no tables are found in the HTML content.
         """
         # Convert HtmlElement to string
-        tree_str = io.StringIO(tree.text_content())
-        dfs = pd.read_html(tree_str, flavor="lxml")
+        # Convert HtmlElement to string, preserving HTML structure
+        html_str = etree.tostring(tree, encoding='unicode', method='html')
 
-        return [dataframe_util.cleanup_html_table_df(df=df).to_dict("records") for df in dfs]
+        # Parse the HTML using Beautiful Soup
+        soup = BeautifulSoup(html_str, 'lxml')
+
+        # Find all table elements
+        tables = soup.find_all('table')
+
+        if not tables:
+            return []
+
+        return [dataframe_util.cleanup_html_table_df(df=df).to_dict("records") for df in tables]

@@ -9,7 +9,7 @@ repository = "https://github.com/quarryai/quarry-core"
 homepage = "https://github.com/quarryai/quarry-core"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<4.0"
+python = ">=3.11,<3.13"
 pydantic = "2.8.2"
 aiohttp = "3.10.5"
 feedparser = "6.0.11"
@@ -32,7 +32,8 @@ scrapy = "2.11.2"
 markdown2 = "2.5.0"
 rich = "13.7.1"
 orjson = "3.10.7"
-
+tabulate = "0.9.0"
+unstructured = "0.15.6"
 
 
 [tool.poetry.dev-dependencies]

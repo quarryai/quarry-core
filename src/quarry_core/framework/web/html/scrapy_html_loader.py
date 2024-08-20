@@ -76,5 +76,3 @@ class ScrapyHTMLLoader:
             item (Dict[str, Any]): A dictionary containing the scraped content and URL.
         """
         self.results.append(HTMLPageContent(url=item.get("url"), html=item.get("content", b"")))
-
-

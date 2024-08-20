@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 
 
@@ -27,4 +26,4 @@ def cleanup_html_table_df(df: pd.DataFrame, unnamed_col_prefix: str = "unnamed_c
     # Rename columns using a list comprehension
     df.columns = [rename_column(col, idx) for idx, col in enumerate(df.columns)]
 
-    return df.replace({np.nan, None})
+    return df.where(pd.notna(df), None)

@@ -54,6 +54,7 @@ class HTMLElementXPaths:
     ]
 
     MISC: Final[List[str]] = [
+        "//script",
         "//form",
         '//*[contains(@class, "related")]',
         '//*[contains(@class, "widget")]',
@@ -75,6 +76,7 @@ class HTMLElementXPaths:
 
     AUTHOR: List[str] = [
         '//meta[@name="author"]/@content',
+        '//meta[@name="article:author"]/@content',
         '//meta[@property="article:author"]/@content',
         '//meta[@property="og:author"]/@content',
         '//span[contains(@class, "author")]/text()',
@@ -115,9 +117,7 @@ class HTMLElementXPaths:
         '//meta[@name="twitter:title"]/@content',
     ]
 
-    DESCRIPTION: List[str] = [
-        '//meta[@name="description"]/@content'
-    ]
+    DESCRIPTION: List[str] = ['//meta[@name="description"]/@content']
 
     KEYWORDS: List[str] = [
         '//meta[@name="keywords"]/@content',
