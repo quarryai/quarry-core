@@ -1,5 +1,5 @@
 import asyncio
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from lxml import html
 from lxml.html import HtmlElement
 from quarry_core.framework.data.formatter.html.html_to_dict_transformer import HTMLTransformer
@@ -30,22 +30,21 @@ async def main() -> None:
     metadata: Dict = HTMLMetadataExtractor(tree=orig_tree).try_get_all()
 
     # Clean up the HTML tree
-    tree_cleaned: Optional[HtmlElement] = (
-        LxmlHTMLTreeSanitizer(url=downloaded_html.url, tree=orig_tree)
-        .cleanup(config=HTMLTreeSanitizerConfig())
-        .set_urls_to_abs()
-        .try_get_body()
-    )
+    sanitizer: LxmlHTMLTreeSanitizer = LxmlHTMLTreeSanitizer(url=downloaded_html.url, tree=orig_tree)
 
-    if tree_cleaned is not None:
+    if sanitizer.cleanup(config=HTMLTreeSanitizerConfig()):
         # Convert sanitized HTML to plaintext as a first step using HTML2Text and then to final HTML tree
-        tree_sanitized: HtmlElement = HTMLTransformer.sanitize(tree_cleaned)
+        tree_sanitized: HtmlElement = sanitizer.sanitize()
 
         # JSON
-        dict_unstructured = HTMLTransformer.to_dict_unstructured(tree_sanitized)
-        dict_beautifulsoup = HTMLTransformer.to_dict_beautifulsoup(tree_sanitized)
-        # Markdown
-        markdown: str = HTMLTransformer.to_markdown(tree_sanitized)
+        # dict_unstructured = HTMLTransformer.to_dict_unstructured(tree_sanitized)
+        # dict_beautifulsoup = HTMLTransformer.to_dict_beautifulsoup(tree_sanitized)
+
+        # Markdown - Seems to work well with tree cleaned vs sanitized
+        markdown: str = HTMLTransformer.to_markdown(sanitizer.tree_cleaned)
+
+        # HTML
+        # html_tree: str = HTMLTransformer.to_html_str(tree_sanitized)
 
         # Extract various elements
         images: List[Dict[str, Any]] = HTMLDataElementsExtractor.try_extract_images(

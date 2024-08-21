@@ -2,6 +2,8 @@ from urllib.parse import urljoin
 from typing import Optional, List
 from lxml.html import HtmlElement
 
+from quarry_core.framework.data.formatter.html.html_to_dict_transformer import HTMLTransformer
+from quarry_core.framework.data.formatter.markdown.markdown_transformer import MarkdownTransformer
 from quarry_core.framework.web.html.html_element_xpaths import HTMLElementXPaths
 from quarry_core.framework.web.html.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
 
@@ -14,13 +16,16 @@ class LxmlHTMLTreeSanitizer:
     extract main content, and convert relative URLs to absolute URLs.
     """
 
-    _tree_cleaned: Optional[HtmlElement] = None
-
     def __init__(self, url: str, tree: HtmlElement):
-        self.tree: HtmlElement = tree
+        self._orig_tree: HtmlElement = tree
+        self.tree_cleaned: Optional[HtmlElement] = None
         self.url = url
 
-    def cleanup(self, config: Optional[HTMLTreeSanitizerConfig] = None) -> 'LxmlHTMLTreeSanitizer':
+    def sanitize(self) -> HtmlElement:
+        plaintext: str = HTMLTransformer.to_plaintext(self.tree_cleaned)
+        return MarkdownTransformer.to_html_lxml(plaintext)
+
+    def cleanup(self, config: Optional[HTMLTreeSanitizerConfig] = None) -> bool:
         """
         Cleanup the HTML tree by removing unwanted elements based on the provided configuration.
 
@@ -33,25 +38,17 @@ class LxmlHTMLTreeSanitizer:
         if config is None:
             config = HTMLTreeSanitizerConfig()
 
-        body: List[HtmlElement] = self.tree.xpath("//body")
+        body: List[HtmlElement] = self._orig_tree.xpath("//body")
 
         if not body:
-            self._tree_cleaned = None
+            self.tree_cleaned = None
+            return False
         else:
-            self._tree_cleaned = body[0]
+            self.tree_cleaned = body[0]
             excluded_elements: List[str] = self._get_excluded_elements(config)
-            self._remove_elements(self._tree_cleaned, excluded_elements)
-
-        return self
-
-    def try_get_body(self) -> Optional[HtmlElement]:
-        """
-        Attempt to get the sanitized body of the HTML.
-
-        Returns:
-            Optional[HtmlElement]: The sanitized body if available, None otherwise.
-        """
-        return self._tree_cleaned
+            self._remove_elements(tree=self.tree_cleaned, excluded_xpaths=excluded_elements)
+            self._set_urls_to_abs(tree=self.tree_cleaned, url=self.url)
+            return True
 
     def try_get_article(self) -> Optional[HtmlElement]:
         """
@@ -60,32 +57,29 @@ class LxmlHTMLTreeSanitizer:
         Returns:
             Optional[HtmlElement]: The main content element if found, None otherwise.
         """
-        if self._tree_cleaned is None:
+        if self.tree_cleaned is None:
             return None
 
         for xpath in HTMLElementXPaths.ARTICLE:
-            main_content: List[HtmlElement] = self._tree_cleaned.xpath(xpath)
+            main_content: List[HtmlElement] = self.tree_cleaned.xpath(xpath)
             if main_content:
                 return main_content[0]
 
         return None
 
-    def set_urls_to_abs(self) -> 'LxmlHTMLTreeSanitizer':
+    @staticmethod
+    def _set_urls_to_abs(tree: HtmlElement, url: str):
         """
         Convert relative URLs to absolute URLs in the sanitized HTML body.
 
         Returns:
             LxmlHTMLTreeSanitizer: The current instance for method chaining.
         """
-        if self._tree_cleaned is None:
-            return self
-
-        for element in self._tree_cleaned.xpath(".//*[@src or @href]"):
-            for attr in ["src", "href"]:
-                if element.get(attr):
-                    element.set(attr, urljoin(self.url, element.get(attr)))
-
-        return self
+        if tree is not None:
+            for element in tree.xpath(".//*[@src or @href]"):
+                for attr in ["src", "href"]:
+                    if element.get(attr):
+                        element.set(attr, urljoin(url, element.get(attr)))
 
     def _get_excluded_elements(self, config: HTMLTreeSanitizerConfig) -> List[str]:
         """
@@ -117,15 +111,15 @@ class LxmlHTMLTreeSanitizer:
         return excluded_elements
 
     @staticmethod
-    def _remove_elements(tree: HtmlElement, xpath_list: List[str]) -> None:
+    def _remove_elements(tree: HtmlElement, excluded_xpaths: List[str]) -> None:
         """
         Remove elements from the HTML tree based on a list of XPath expressions.
 
         Args:
             tree (HtmlElement): The HTML tree to modify.
-            xpath_list (List[str]): A list of XPath expressions for elements to remove.
+            excluded_xpaths (List[str]): A list of XPath expressions for elements to remove.
         """
-        for xpath in xpath_list:
+        for xpath in excluded_xpaths:
             elements: List[HtmlElement] = tree.xpath(xpath)
             for element in elements:
                 parent: Optional[HtmlElement] = element.getparent()
