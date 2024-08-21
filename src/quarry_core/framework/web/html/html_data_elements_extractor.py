@@ -90,29 +90,27 @@ class HTMLDataElementsExtractor:
             return []
 
         result = []
+
         for table in tables:
             table_html = str(table)  # Convert each table to a string
-            try:
-                dfs = pd.read_html(io.StringIO(table_html))
-                for df in dfs:
-                    df_clean = dataframe_util.cleanup_html_table_df(df=df)
 
-                    # Convert DataFrame to CSV string
-                    csv_buffer = io.StringIO()
-                    df_clean.to_csv(path_or_buf=csv_buffer,
-                                    index=False,
-                                    sep=",",
-                                    header=False,
-                                    quoting=csv.QUOTE_NONNUMERIC,
-                                    escapechar="\\")
-                    csv_string = csv_buffer.getvalue()
+            dfs = pd.read_html(io.StringIO(table_html))
 
-                    result.append({
-                        "columns": str(list(df_clean.columns)),
-                        "rows": csv_string.split("\r\n")
-                    })
-            except ValueError:
-                # If pd.read_html fails to parse a table, skip it
-                continue
+            for df in dfs:
+                df_clean = dataframe_util.cleanup_html_table_df(df=df)
+
+                # Convert DataFrame to CSV string
+                csv_buffer = io.StringIO()
+                df_clean.to_csv(
+                    path_or_buf=csv_buffer,
+                    index=False,
+                    sep=",",
+                    header=False,
+                    quoting=csv.QUOTE_NONNUMERIC,
+                    escapechar="\\",
+                )
+                csv_string = csv_buffer.getvalue()
+
+                result.append({"columns": str(list(df_clean.columns)), "rows": csv_string.split("\r\n")})
 
         return result

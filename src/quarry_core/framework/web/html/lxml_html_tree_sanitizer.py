@@ -14,15 +14,15 @@ class LxmlHTMLTreeSanitizer:
     extract main content, and convert relative URLs to absolute URLs.
     """
 
-    _sanitized_tree: Optional[HtmlElement] = None
+    _tree_cleaned: Optional[HtmlElement] = None
 
     def __init__(self, url: str, tree: HtmlElement):
         self.tree: HtmlElement = tree
         self.url = url
 
-    def sanitize(self, config: Optional[HTMLTreeSanitizerConfig] = None) -> 'LxmlHTMLTreeSanitizer':
+    def cleanup(self, config: Optional[HTMLTreeSanitizerConfig] = None) -> 'LxmlHTMLTreeSanitizer':
         """
-        Sanitize the HTML tree by removing unwanted elements based on the provided configuration.
+        Cleanup the HTML tree by removing unwanted elements based on the provided configuration.
 
         Args:
             config (Optional[HTMLTreeSanitizerConfig]): The sanitization configuration. If None, default config is used.
@@ -36,11 +36,11 @@ class LxmlHTMLTreeSanitizer:
         body: List[HtmlElement] = self.tree.xpath("//body")
 
         if not body:
-            self._sanitized_tree = None
+            self._tree_cleaned = None
         else:
-            self._sanitized_tree = body[0]
+            self._tree_cleaned = body[0]
             excluded_elements: List[str] = self._get_excluded_elements(config)
-            self._remove_elements(self._sanitized_tree, excluded_elements)
+            self._remove_elements(self._tree_cleaned, excluded_elements)
 
         return self
 
@@ -51,7 +51,7 @@ class LxmlHTMLTreeSanitizer:
         Returns:
             Optional[HtmlElement]: The sanitized body if available, None otherwise.
         """
-        return self._sanitized_tree
+        return self._tree_cleaned
 
     def try_get_article(self) -> Optional[HtmlElement]:
         """
@@ -60,11 +60,11 @@ class LxmlHTMLTreeSanitizer:
         Returns:
             Optional[HtmlElement]: The main content element if found, None otherwise.
         """
-        if self._sanitized_tree is None:
+        if self._tree_cleaned is None:
             return None
 
         for xpath in HTMLElementXPaths.ARTICLE:
-            main_content: List[HtmlElement] = self._sanitized_tree.xpath(xpath)
+            main_content: List[HtmlElement] = self._tree_cleaned.xpath(xpath)
             if main_content:
                 return main_content[0]
 
@@ -77,10 +77,10 @@ class LxmlHTMLTreeSanitizer:
         Returns:
             LxmlHTMLTreeSanitizer: The current instance for method chaining.
         """
-        if self._sanitized_tree is None:
+        if self._tree_cleaned is None:
             return self
 
-        for element in self._sanitized_tree.xpath(".//*[@src or @href]"):
+        for element in self._tree_cleaned.xpath(".//*[@src or @href]"):
             for attr in ["src", "href"]:
                 if element.get(attr):
                     element.set(attr, urljoin(self.url, element.get(attr)))

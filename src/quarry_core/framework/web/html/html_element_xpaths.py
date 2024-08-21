@@ -89,7 +89,7 @@ class HTMLElementXPaths:
         '//div[contains(@class, "author-name")]/text()',
         '//span[contains(@class, "fn")]/text()',
         '//*[@itemprop="author"]/*[@itemprop="name"]/text()',
-        '//*[contains(@class, "modified") and contains(., "by")]//a/text()'
+        '//*[contains(@class, "modified") and contains(., "by")]//a/text()',
     ]
 
     PUBLISHED_TIME: List[str] = [

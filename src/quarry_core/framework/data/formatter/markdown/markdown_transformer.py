@@ -14,18 +14,18 @@ class MarkdownTransformer:
     """A class for processing and converting markdown content to various formats."""
 
     @staticmethod
-    def to_html_lxml(markdown: str, replace_code_block: bool = True) -> HtmlElement:
+    def to_html_lxml(plaintext: str, replace_code_block: bool = True) -> HtmlElement:
         """
         Convert plaintext with custom code tags to HTML.
 
         Args:
-            markdown (str): The input Markdown text.
+            plaintext (str): The input Markdown text.
             replace_code_block (bool): Handle replacement of code blocks [code][/code].
         Returns:
             str: The converted HTML.
         """
 
-        preprocessed = markdown.replace("[code]", "<pre><code>").replace("[/code]", "</code></pre>")
+        preprocessed = plaintext.replace("[code]", "<pre><code>").replace("[/code]", "</code></pre>")
         return html.fromstring(f"<html>\n<body>\n{markdown2.markdown(preprocessed)}\n</body>\n</html>")
 
     @staticmethod

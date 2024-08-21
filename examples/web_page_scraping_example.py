@@ -2,9 +2,7 @@ import asyncio
 from typing import Dict, List, Any, Optional
 from lxml import html
 from lxml.html import HtmlElement
-from quarry_core.framework.data.formatter.html.html_to_dict_transformer import HTMLToDictTransformer
-from quarry_core.framework.data.formatter.markdown.markdown_transformer import MarkdownTransformer
-from quarry_core.framework.web.html.html2text_extended import HTML2TextExtended
+from quarry_core.framework.data.formatter.html.html_to_dict_transformer import HTMLTransformer
 from quarry_core.framework.web.html.html_data_elements_extractor import HTMLDataElementsExtractor
 from quarry_core.framework.web.html.html_metadata_extractor import HTMLMetadataExtractor
 from quarry_core.framework.web.html.html_page_content import HTMLPageContent
@@ -32,33 +30,30 @@ async def main() -> None:
     metadata: Dict = HTMLMetadataExtractor(tree=orig_tree).try_get_all()
 
     # Clean up the HTML tree
-    sanitized_tree: Optional[HtmlElement] = (
+    tree_cleaned: Optional[HtmlElement] = (
         LxmlHTMLTreeSanitizer(url=downloaded_html.url, tree=orig_tree)
-        .sanitize(config=HTMLTreeSanitizerConfig())
+        .cleanup(config=HTMLTreeSanitizerConfig())
         .set_urls_to_abs()
         .try_get_body()
     )
 
-    if sanitized_tree is not None:
+    if tree_cleaned is not None:
         # Convert sanitized HTML to plaintext as a first step using HTML2Text and then to final HTML tree
-        plaintext: str = HTML2TextExtended().to_plaintext(sanitized_tree)
-        final_tree: HtmlElement = MarkdownTransformer.to_html_lxml(plaintext)
+        tree_sanitized: HtmlElement = HTMLTransformer.sanitize(tree_cleaned)
+
+        # JSON
+        dict_unstructured = HTMLTransformer.to_dict_unstructured(tree_sanitized)
+        dict_beautifulsoup = HTMLTransformer.to_dict_beautifulsoup(tree_sanitized)
+        # Markdown
+        markdown: str = HTMLTransformer.to_markdown(tree_sanitized)
 
         # Extract various elements
         images: List[Dict[str, Any]] = HTMLDataElementsExtractor.try_extract_images(
-            tree=final_tree, base_url=downloaded_html.url
+            tree=tree_sanitized, base_url=downloaded_html.url
         )
-        links: List[Dict[str, Any]] = HTMLDataElementsExtractor.try_extract_links(tree=final_tree)
-        tables = HTMLDataElementsExtractor.try_extract_tables(tree=final_tree)
+        links: List[Dict[str, Any]] = HTMLDataElementsExtractor.try_extract_links(tree=tree_sanitized)
+        tables = HTMLDataElementsExtractor.try_extract_tables(tree=tree_sanitized)
 
-        # Parse content into different formats:
-
-        # JSON
-        dict_unstructured = HTMLToDictTransformer.to_dict_unstructured(final_tree)
-        dict_beautifulsoup = HTMLToDictTransformer.to_dict_beautifulsoup(final_tree)
-        # Markdown
-        markdown = HTML2TextExtended().to_plaintext(final_tree)
-        standardize = MarkdownTransformer.replace_tables(markdown).replace("[code]", "```\n").replace("[/code]", "```\n")
         pass
 
         # Construct and return the result dictionary

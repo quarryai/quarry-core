@@ -94,7 +94,7 @@ class HTMLMetadataExtractor:
         """
         for prefix in AUTHOR_PREFIXES:
             if author.startswith(prefix):
-                author = author[len(prefix):]
+                author = author[len(prefix) :]
                 break
 
         return " ".join(author.split()).strip()

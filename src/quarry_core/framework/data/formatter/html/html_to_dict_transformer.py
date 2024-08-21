@@ -5,14 +5,25 @@ from lxml.html import HtmlElement
 from unstructured.partition.html import partition_html
 import nltk
 
+from quarry_core.framework.data.formatter.markdown.markdown_transformer import MarkdownTransformer
+from quarry_core.framework.web.html.html2text_extended import HTML2TextExtended
+
 nltk.download('punkt', quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
 
 
-class HTMLToDictTransformer:
+class HTMLTransformer:
     """
     A class for converting HTML to dictionary representations using different methods.
     """
+
+    @staticmethod
+    def to_plaintext(html: HtmlElement) -> str:
+        return HTML2TextExtended().to_plaintext(html_tree=html)
+
+    @staticmethod
+    def to_markdown(html: HtmlElement) -> str:
+        return HTML2TextExtended().to_markdown(html_tree=html)
 
     @staticmethod
     def to_dict_unstructured(html: HtmlElement) -> Dict[str, List[Dict[str, Any]]]:
@@ -52,10 +63,15 @@ class HTMLToDictTransformer:
         soup = BeautifulSoup(html_string, 'lxml')
 
         return [
-            HTMLToDictTransformer._parse_beautifulsoup_element(child)
+            HTMLTransformer._parse_beautifulsoup_element(child)
             for child in soup.body.children
             if child != "\n"
         ]
+
+    @staticmethod
+    def sanitize(tree: HtmlElement):
+        plaintext: str = HTMLTransformer.to_plaintext(tree)
+        return MarkdownTransformer.to_html_lxml(plaintext)
 
     @staticmethod
     def _parse_beautifulsoup_element(element: Union[Tag, NavigableString]) -> Union[str, Dict[str, Any]]:
@@ -83,7 +99,7 @@ class HTMLToDictTransformer:
             result.update({"href": element.get("href", ""), "text": element.string or ""})
         else:
             content: List[Union[str, Dict[str, Any]]] = [
-                HTMLToDictTransformer._parse_beautifulsoup_element(child)
+                HTMLTransformer._parse_beautifulsoup_element(child)
                 for child in element.children
                 if not isinstance(child, NavigableString) or child.strip()
             ]
