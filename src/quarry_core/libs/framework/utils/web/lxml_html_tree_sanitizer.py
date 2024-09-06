@@ -2,10 +2,10 @@ from urllib.parse import urljoin
 from typing import Optional, List
 from lxml.html import HtmlElement
 
-from quarry_core.libraries.framework.data.formatter.html.html_to_dict_transformer import HTMLTransformer
-from quarry_core.libraries.framework.data.formatter.markdown.markdown_transformer import MarkdownTransformer
-from quarry_core.libraries.framework.web.html_element_xpaths import HTMLElementXPaths
-from quarry_core.libraries.framework.web.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
+from quarry_core.libs.framework.utils.data.formatter.html.html_to_dict_transformer import HTMLTransformer
+from quarry_core.libs.framework.utils.data.formatter.markdown.markdown_transformer import MarkdownTransformer
+from quarry_core.libs.framework.utils.web.html_element_xpaths import HTMLElementXPaths
+from quarry_core.libs.framework.utils.web.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
 
 
 class LxmlHTMLTreeSanitizer:

@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from lxml import etree
 from lxml.html import HtmlElement
 import csv
-from quarry_core.libraries.framework.utilities import dataframe_util
+from quarry_core.libs.framework.utils.data.helpers import dataframe_util
 
 
 class HTMLDataElementsExtractor:

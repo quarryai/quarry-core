@@ -3,13 +3,13 @@ from typing import Dict, List, Any
 from lxml import html
 from lxml.html import HtmlElement
 
-from quarry_core.libraries.framework.data.formatter.html.html_to_dict_transformer import HTMLTransformer
-from quarry_core.libraries.framework.web.html_data_elements_extractor import HTMLDataElementsExtractor
-from quarry_core.libraries.framework.web.html_metadata_extractor import HTMLMetadataExtractor
-from quarry_core.libraries.framework.web.html_page_content import HTMLPageContent
-from quarry_core.libraries.framework.web.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
-from quarry_core.libraries.framework.web.lxml_html_tree_sanitizer import LxmlHTMLTreeSanitizer
-from quarry_core.libraries.framework.web.scrapy_html_loader import ScrapyHTMLLoader
+from quarry_core.libs.framework.utils.data.formatter.html.html_to_dict_transformer import HTMLTransformer
+from quarry_core.libs.framework.utils.web.html_data_elements_extractor import HTMLDataElementsExtractor
+from quarry_core.libs.framework.utils.web.html_metadata_extractor import HTMLMetadataExtractor
+from quarry_core.libs.framework.utils.web.html_page_content import HTMLPageContent
+from quarry_core.libs.framework.utils.web.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
+from quarry_core.libs.framework.utils.web.lxml_html_tree_sanitizer import LxmlHTMLTreeSanitizer
+from quarry_core.libs.framework.utils.web.scrapy_html_loader import ScrapyHTMLLoader
 
 
 # Test links for scraping
@@ -22,7 +22,7 @@ TEST_LINKS: Dict[str, str] = {
 
 async def main() -> None:
     # Fetch the HTML content
-    downloaded_html: HTMLPageContent = ScrapyHTMLLoader().fetch(TEST_LINKS["coindesk"])
+    downloaded_html: HTMLPageContent = ScrapyHTMLLoader().fetch(TEST_LINKS["tables"])
 
     # Parse the HTML into a tree structure
     orig_tree: HtmlElement = html.fromstring(downloaded_html.html)
