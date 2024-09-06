@@ -12,7 +12,7 @@ class ScrapyHTMLLoader:
     A loader class for fetching HTML content using Scrapy.
 
     Attributes:
-        results (List[quarry_core.framework.web.html.html_page_content.HTMLPageContent]): A list to store the results of the spider.
+        results (List[HTMLPageContent]): A list to store the results of the spider.
         settings (Settings): Scrapy settings for the crawler.
     """
 
@@ -38,8 +38,7 @@ class ScrapyHTMLLoader:
         settings.set(
             "DOWNLOADER_MIDDLEWARES",
             {
-                "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None,
-                "quarry_core.framework.web.html.random_user_agent.RandomUserAgentMiddleware": 400,
+                "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None
             },
         )
         settings.set("EXTENSIONS", {"scrapy.extensions.telnet.TelnetConsole": None})
