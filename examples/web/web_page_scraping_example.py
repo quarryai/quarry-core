@@ -22,7 +22,7 @@ TEST_LINKS: Dict[str, str] = {
 
 async def main() -> None:
     # Fetch the HTML content
-    downloaded_html: HTMLPageContent = ScrapyHTMLLoader().fetch(TEST_LINKS["tables"])
+    downloaded_html: HTMLPageContent = ScrapyHTMLLoader().fetch(TEST_LINKS["coindesk"])
 
     # Parse the HTML into a tree structure
     orig_tree: HtmlElement = html.fromstring(downloaded_html.html)

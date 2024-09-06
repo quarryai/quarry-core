@@ -3,8 +3,8 @@ from typing import List, Dict, Any
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from scrapy.utils.project import get_project_settings
-from quarry_core.framework.web.html.scrapy_html_content_spider import ScrapyHTMLContentSpider
-from quarry_core.framework.web.html.html_page_content import HTMLPageContent
+from quarry_core.libraries.framework.web.scrapy_html_content_spider import ScrapyHTMLContentSpider
+from quarry_core.libraries.framework.web.html_page_content import HTMLPageContent
 
 
 class ScrapyHTMLLoader:
