@@ -7,7 +7,7 @@ import pandas as pd
 from lxml import html
 from lxml.html import HtmlElement
 
-from quarry_core.utilities import dataframe_util
+from quarry_core.libraries.framework.utilities import dataframe_util
 
 
 class MarkdownTransformer:

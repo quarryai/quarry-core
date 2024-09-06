@@ -2,13 +2,14 @@ import asyncio
 from typing import Dict, List, Any
 from lxml import html
 from lxml.html import HtmlElement
-from quarry_core.framework.data.formatter.html.html_to_dict_transformer import HTMLTransformer
-from quarry_core.framework.web.html.html_data_elements_extractor import HTMLDataElementsExtractor
-from quarry_core.framework.web.html.html_metadata_extractor import HTMLMetadataExtractor
-from quarry_core.framework.web.html.html_page_content import HTMLPageContent
-from quarry_core.framework.web.html.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
-from quarry_core.framework.web.html.lxml_html_tree_sanitizer import LxmlHTMLTreeSanitizer
-from quarry_core.framework.web.html.scrapy_html_loader import ScrapyHTMLLoader
+
+from quarry_core.libraries.framework.data.formatter.html.html_to_dict_transformer import HTMLTransformer
+from quarry_core.libraries.framework.web.html_data_elements_extractor import HTMLDataElementsExtractor
+from quarry_core.libraries.framework.web.html_metadata_extractor import HTMLMetadataExtractor
+from quarry_core.libraries.framework.web.html_page_content import HTMLPageContent
+from quarry_core.libraries.framework.web.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
+from quarry_core.libraries.framework.web.lxml_html_tree_sanitizer import LxmlHTMLTreeSanitizer
+from quarry_core.libraries.framework.web.scrapy_html_loader import ScrapyHTMLLoader
 
 
 # Test links for scraping

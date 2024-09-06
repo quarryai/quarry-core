@@ -3,8 +3,8 @@ from datetime import datetime
 from lxml.html import HtmlElement
 
 from quarry_core.framework.web.html.html_element_xpaths import HTMLElementXPaths
-from quarry_core.utilities import datetime_util
-from quarry_core.utilities.constants import AUTHOR_PREFIXES
+from quarry_core.libraries.framework.utilities import datetime_util
+from quarry_core.libraries.framework.utilities.constants import AUTHOR_PREFIXES
 
 
 class HTMLMetadataExtractor:
