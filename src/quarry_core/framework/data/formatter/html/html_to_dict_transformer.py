@@ -16,6 +16,9 @@ class HTMLTransformer:
     A class for converting HTML to dictionary representations using different methods.
     """
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def to_html_str(html: HtmlElement) -> str:
         return etree.tostring(html, pretty_print=True, with_tail=False, encoding="Unicode")
