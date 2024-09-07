@@ -5,7 +5,7 @@ from lxml.html import HtmlElement
 from unstructured.partition.html import partition_html
 import nltk
 
-from quarry_core.libs.framework.utils.web.html_2_text_lxml import HTML2TextLxml
+from quarry_core.utils.web.html_2_text_lxml import HTML2TextLxml
 
 nltk.download('punkt', quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)

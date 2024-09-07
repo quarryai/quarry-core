@@ -1,0 +1,370 @@
+{
+  "models": [
+    {
+      "identifier": "gemini-1.5-flash",
+      "family": "Gemini 1.5 Flash",
+      "points_to": "gemini-1.5-flash-001",
+      "description": "Google's fastest, most cost-efficient multimodal model with great performance for high-frequency tasks.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 1048576,
+        "max_prompt_tokens": 1048576,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 3600
+      },
+      "mod_vid": {
+        "max_duration_seconds": 3600
+      },
+      "mod_aud": {
+        "max_duration_seconds": 34200
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-flash-latest",
+      "family": "Gemini 1.5 Flash",
+      "points_to": null,
+      "description": "Latest version of Gemini 1.5 Flash.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 1048576,
+        "max_prompt_tokens": 1048576,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 3600
+      },
+      "mod_vid": {
+        "max_duration_seconds": 3600
+      },
+      "mod_aud": {
+        "max_duration_seconds": 34200
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-flash-001",
+      "family": "Gemini 1.5 Flash",
+      "points_to": null,
+      "description": "Stable version of Gemini 1.5 Flash.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 1048576,
+        "max_prompt_tokens": 1048576,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 3600
+      },
+      "mod_vid": {
+        "max_duration_seconds": 3600
+      },
+      "mod_aud": {
+        "max_duration_seconds": 34200
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-flash-exp-0827",
+      "family": "Gemini 1.5 Flash",
+      "points_to": null,
+      "description": "Experimental version of Gemini 1.5 Flash.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 1048576,
+        "max_prompt_tokens": 1048576,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 3600
+      },
+      "mod_vid": {
+        "max_duration_seconds": 3600
+      },
+      "mod_aud": {
+        "max_duration_seconds": 34200
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-flash-8b-exp-0827",
+      "family": "Gemini 1.5 Flash",
+      "points_to": null,
+      "description": "Experimental 8B version of Gemini 1.5 Flash.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 1048576,
+        "max_prompt_tokens": 1048576,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 3600
+      },
+      "mod_vid": {
+        "max_duration_seconds": 3600
+      },
+      "mod_aud": {
+        "max_duration_seconds": 34200
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-pro",
+      "family": "Gemini 1.5 Pro",
+      "points_to": "gemini-1.5-pro-001",
+      "description": "Google's best performing multimodal model with features for a wide variety of reasoning tasks.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 2097152,
+        "max_prompt_tokens": 2097152,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 7200
+      },
+      "mod_vid": {
+        "max_duration_seconds": 7200
+      },
+      "mod_aud": {
+        "max_duration_seconds": 68400
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-pro-latest",
+      "family": "Gemini 1.5 Pro",
+      "points_to": null,
+      "description": "Latest version of Gemini 1.5 Pro.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 2097152,
+        "max_prompt_tokens": 2097152,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 7200
+      },
+      "mod_vid": {
+        "max_duration_seconds": 7200
+      },
+      "mod_aud": {
+        "max_duration_seconds": 68400
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-pro-001",
+      "family": "Gemini 1.5 Pro",
+      "points_to": null,
+      "description": "Stable version of Gemini 1.5 Pro.",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 2097152,
+        "max_prompt_tokens": 2097152,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 7200
+      },
+      "mod_vid": {
+        "max_duration_seconds": 7200
+      },
+      "mod_aud": {
+        "max_duration_seconds": 68400
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-pro-exp-0801",
+      "family": "Gemini 1.5 Pro",
+      "points_to": null,
+      "description": "Experimental version of Gemini 1.5 Pro (0801).",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 2097152,
+        "max_prompt_tokens": 2097152,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 7200
+      },
+      "mod_vid": {
+        "max_duration_seconds": 7200
+      },
+      "mod_aud": {
+        "max_duration_seconds": 68400
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.5-pro-exp-0827",
+      "family": "Gemini 1.5 Pro",
+      "points_to": null,
+      "description": "Experimental version of Gemini 1.5 Pro (0827).",
+      "modalities": ["txt-to-txt", "aud-to-txt", "img-to-txt", "vid-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": 2097152,
+        "max_prompt_tokens": 2097152,
+        "max_response_tokens": 8192
+      },
+      "mod_img": {
+        "max_images_per_prompt": 7200
+      },
+      "mod_vid": {
+        "max_duration_seconds": 7200
+      },
+      "mod_aud": {
+        "max_duration_seconds": 68400
+      },
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.0-pro",
+      "family": "Gemini 1.0 Pro",
+      "points_to": "gemini-1.0-pro-001",
+      "description": "Handles natural language tasks, multi-turn text and code chat, and code generation.",
+      "modalities": ["txt-to-txt", "txt-to-cod"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": null,
+        "max_prompt_tokens": null,
+        "max_response_tokens": null
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.0-pro-latest",
+      "family": "Gemini 1.0 Pro",
+      "points_to": null,
+      "description": "Latest version of Gemini 1.0 Pro.",
+      "modalities": ["txt-to-txt", "txt-to-cod"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": null,
+        "max_prompt_tokens": null,
+        "max_response_tokens": null
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "gemini-1.0-pro-001",
+      "family": "Gemini 1.0 Pro",
+      "points_to": null,
+      "description": "Stable version of Gemini 1.0 Pro.",
+      "modalities": ["txt-to-txt", "txt-to-cod"],
+      "is_legacy": false,
+      "training_end_date": "11/2023",
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": null,
+        "max_prompt_tokens": null,
+        "max_response_tokens": null
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "google"
+    },
+    {
+      "identifier": "text-embedding-004",
+      "family": "Text Embedding",
+      "points_to": null,
+      "description": "Measures the relatedness of text strings, achieving stronger retrieval performance on standard MTEB embedding benchmarks.",
+      "modalities": ["txt-to-emb"],
+      "is_legacy": false,
+      "training_end_date": null,
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": null,
+        "max_prompt_tokens": 2048,
+        "max_response_tokens": null
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": {
+        "max_input_tokens": 2048,
+        "embedding_dimensions": 768
+      },
+      "provider": "google"
+    },
+    {
+      "identifier": "embedding-001",
+      "family": "mod_emb",
+      "points_to": null,
+      "description": "Generates text embeddings for input text, optimized for creating embeddings with 768 dimensions for text of up to 2,048 tokens.",
+      "modalities": ["txt-to-emb"],
+      "is_legacy": true,
+      "training_end_date": null,
+      "cost": null,
+      "mod_txt": {
+        "max_context_tokens": null,
+        "max_prompt_tokens": 2048,
+        "max_response_tokens": null
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": {
+        "max_input_tokens": 2048,
+        "embedding_dimensions": 768
+      },
+      "provider": "google"
+    }
+  ]
+}

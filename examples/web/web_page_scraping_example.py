@@ -3,13 +3,14 @@ from typing import Dict, List, Any
 from lxml import html
 from lxml.html import HtmlElement
 
-from quarry_core.libs.framework.utils.data.formatter.html.html_to_dict_transformer import HTMLTransformer
-from quarry_core.libs.framework.utils.web.html_data_elements_extractor import HTMLDataElementsExtractor
-from quarry_core.libs.framework.utils.web.html_metadata_extractor import HTMLMetadataExtractor
-from quarry_core.libs.framework.utils.web.html_page_content import HTMLPageContent
-from quarry_core.libs.framework.utils.web.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
-from quarry_core.libs.framework.utils.web.lxml_html_tree_sanitizer import LxmlHTMLTreeSanitizer
-from quarry_core.libs.framework.utils.web.scrapy_html_loader import ScrapyHTMLLoader
+
+from quarry_core.utils.web.html_data_elements_extractor import HTMLDataElementsExtractor
+from quarry_core.utils.web.html_metadata_extractor import HTMLMetadataExtractor
+from quarry_core.utils.web.html_page_content import HTMLPageContent
+from quarry_core.utils.web.html_to_dict_transformer import HTMLTransformer
+from quarry_core.utils.web.html_tree_sanitizer_config import HTMLTreeSanitizerConfig
+from quarry_core.utils.web.lxml_html_tree_sanitizer import LxmlHTMLTreeSanitizer
+from quarry_core.utils.web.scrapy_html_loader import ScrapyHTMLLoader
 
 
 # Test links for scraping

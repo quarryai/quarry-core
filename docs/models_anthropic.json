@@ -1,0 +1,165 @@
+{
+  "models": [
+    {
+      "identifier": "claude-3-5-sonnet-20240620",
+      "family": "Claude 3.5 Sonnet",
+      "points_to": null,
+      "description": "Most intelligent model. Highest level of intelligence and capability.",
+      "modalities": ["txt-to-txt", "txt-to-cod", "cod-to-cod", "img-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "04/2024",
+      "cost": {
+        "prompt": 3.00,
+        "response": 15.00
+      },
+      "mod_txt": {
+        "max_context_tokens": 200000,
+        "max_prompt_tokens": 200000,
+        "max_response_tokens": 8192
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "anthropic"
+    },
+    {
+      "identifier": "claude-3-opus-20240229",
+      "family": "Claude 3 Opus",
+      "points_to": null,
+      "description": "Powerful model for highly complex tasks. Top-level performance, intelligence, fluency, and understanding.",
+      "modalities": ["txt-to-txt", "txt-to-cod", "cod-to-cod", "img-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "08/2023",
+      "cost": {
+        "prompt": 15.00,
+        "response": 75.00
+      },
+      "mod_txt": {
+        "max_context_tokens": 200000,
+        "max_prompt_tokens": 200000,
+        "max_response_tokens": 4096
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "anthropic"
+    },
+    {
+      "identifier": "claude-3-sonnet-20240229",
+      "family": "Claude 3 Sonnet",
+      "points_to": null,
+      "description": "Balance of intelligence and speed. Strong utility, balanced for scaled deployments.",
+      "modalities": ["txt-to-txt", "txt-to-cod", "cod-to-cod", "img-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "08/2023",
+      "cost": {
+        "prompt": 3.00,
+        "response": 15.00
+      },
+      "mod_txt": {
+        "max_context_tokens": 200000,
+        "max_prompt_tokens": 200000,
+        "max_response_tokens": 4096
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "anthropic"
+    },
+    {
+      "identifier": "claude-3-haiku-20240307",
+      "family": "Claude 3 Haiku",
+      "points_to": null,
+      "description": "Fastest and most compact model for near-instant responsiveness. Quick and accurate targeted performance.",
+      "modalities": ["txt-to-txt", "txt-to-cod", "cod-to-cod", "img-to-txt"],
+      "is_legacy": false,
+      "training_end_date": "08/2023",
+      "cost": {
+        "prompt": 0.25,
+        "response": 1.25
+      },
+      "mod_txt": {
+        "max_context_tokens": 200000,
+        "max_prompt_tokens": 200000,
+        "max_response_tokens": 4096
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "anthropic"
+    },
+    {
+      "identifier": "claude-2.1",
+      "family": "Claude 2",
+      "points_to": null,
+      "description": "Updated version of Claude 2 with improved accuracy.",
+      "modalities": ["txt-to-txt", "txt-to-cod", "cod-to-cod"],
+      "is_legacy": true,
+      "training_end_date": "01/2023",
+      "cost": {
+        "prompt": 8.00,
+        "response": 24.00
+      },
+      "mod_txt": {
+        "max_context_tokens": 200000,
+        "max_prompt_tokens": 200000,
+        "max_response_tokens": 4096
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "anthropic"
+    },
+    {
+      "identifier": "claude-2.0",
+      "family": "Claude 2",
+      "points_to": null,
+      "description": "Predecessor to Claude 3, offering strong all-round performance.",
+      "modalities": ["txt-to-txt", "txt-to-cod", "cod-to-cod"],
+      "is_legacy": true,
+      "training_end_date": "01/2023",
+      "cost": {
+        "prompt": 8.00,
+        "response": 24.00
+      },
+      "mod_txt": {
+        "max_context_tokens": 100000,
+        "max_prompt_tokens": 100000,
+        "max_response_tokens": 4096
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "anthropic"
+    },
+    {
+      "identifier": "claude-instant-1.2",
+      "family": "Claude Instant",
+      "points_to": null,
+      "description": "Our cheapest small and fast model, a predecessor of Claude Haiku.",
+      "modalities": ["txt-to-txt", "txt-to-cod", "cod-to-cod"],
+      "is_legacy": true,
+      "training_end_date": "01/2023",
+      "cost": {
+        "prompt": 0.80,
+        "response": 2.40
+      },
+      "mod_txt": {
+        "max_context_tokens": 100000,
+        "max_prompt_tokens": 100000,
+        "max_response_tokens": 4096
+      },
+      "mod_img": null,
+      "mod_vid": null,
+      "mod_aud": null,
+      "mod_emb": null,
+      "provider": "anthropic"
+    }
+  ]
+}

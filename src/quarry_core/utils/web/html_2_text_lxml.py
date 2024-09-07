@@ -5,7 +5,7 @@ import pandas as pd
 from lxml import etree
 from lxml.html import HtmlElement
 
-from quarry_core.libs.framework.utils.data.helpers import dataframe_util
+from quarry_core.utils.dtype import dataframe_util
 
 
 class HTML2TextLxml(html2text.HTML2Text):
